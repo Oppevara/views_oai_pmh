@@ -475,14 +475,14 @@ class views_oai_pmh_plugin_display extends views_plugin_display_page {
   }
 
   function check_date_format($date) {
-    $checkstr1 = '([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})T([0-9]{2}):([0-9]{2}):([0-9]{2})Z$';
-    $checkstr2 = '([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}$)';
-    if (ereg($checkstr1, $date, $regs)) {
+    $checkstr1 = '/^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})T([0-9]{2}):([0-9]{2}):([0-9]{2})Z$/';
+    $checkstr2 = '/^([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}$)/';
+    if (preg_match($checkstr1, $date, $regs)) {
       if (checkdate($regs[2], $regs[3], $regs[1])) {
         return 1;
       }
     }
-    elseif (ereg($checkstr2, $date, $regs)) {
+    elseif (preg_match($checkstr2, $date, $regs)) {
       if (checkdate($regs[2], $regs[3], $regs[1])) {
         return 2;
       }
