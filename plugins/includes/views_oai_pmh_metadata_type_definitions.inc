@@ -442,3 +442,130 @@ $oai_ilox->elements = array(
 
 // Assign the data format to the global array of OAI data formats.
 $GLOBALS['views_oai_pmh']['oai_ilox'] = $oai_ilox;
+
+/**
+ * Definition of the OAI Learning Objects Metadata (LOM) data format.
+ */
+$oai_estcore = new views_oai_pmh_metadata_type('oai_estcore');
+$oai_estcore->name = t('EstCore (LOM)');
+$oai_estcore->style_plugin = 'views_oai_pmh_estcore';
+$oai_estcore->row_plugin = 'oai_estcore';
+$oai_estcore->form_group_name = 'oai_estcore_fields';
+$oai_estcore->help = t('Displays the fields as Estcore (LOM) elements.');
+$oai_estcore->base_xml_node = new views_oai_pmh_xml_node(
+  'est:estcore',
+  NULL,
+  array(
+    'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+    'xsi:schemaLocation' => 'http://ltsc.ieee.org/xsd/LOM       http://ltsc.ieee.org/xsd/lomv1.0/lom.xsd     http://www.estcore/2015/XMLSchema',
+    'xmlns:est' => 'http://www.estcore/2015/XMLSchema',
+    'xmlns:oai_lom' => 'http://ltsc.ieee.org/xsd/LOM',
+    'xmlns:lom' => 'http://ltsc.ieee.org/xsd/LOM',
+  )
+);
+$oai_estcore->elements = array(
+  'none' => t('None'),
+
+  // misc elements
+  '(attribute)oai_lom@language' => t('(Attribute) Language'),
+
+  // general
+  'general' => 'General (Requires Template)',
+  'general/identifier/lom:catalog' => 'General > Identifier > Catalog',
+  'general/identifier/lom:entry' => 'General > Identifier > Entry',
+  'general/title/lom:string@language' => 'General > Title',
+  'general/title' => 'General > Title (CLEAN)',
+  'general/language' => 'General > Language',
+  'general/description/lom:string@language' => 'General > Description',
+  'general/keyword' => 'General > Keyword (Requires Template)',
+  'general/keyword/lom:string@language' => 'General > Keyword > String',
+  'general/structure/lom:source' => 'General > Structure > Source',
+  'general/structure/lom:value' => 'General > Structure > Value',
+  'general/aggregationLevel/lom:source' => 'General > Aggregation Level > Source',
+  'general/aggregationLevel/lom:value' => 'General > Aggregation Level > Value',
+
+  // lifeCycle
+  'lifeCycle' => 'Life Cycle (Requires Template)',
+  'lifeCycle/version/lom:string' => 'Life Cycle > Version',
+  'lifeCycle/status/lom:source' => 'Life Cycle > Status > Source',
+  'lifeCycle/status/lom:value' => 'Life Cycle > Status > Value',
+  'lifeCycle/contribute/lom:role/lom:source' => 'Life Cycle > Contribute > Role > Source',
+  'lifeCycle/contribute/lom:role/lom:value' => 'Life Cycle > Contribute > Role > Value',
+  'lifeCycle/contribute/lom:entity' => 'Life Cycle > Contribute > Entity',
+  'lifeCycle/contribute/lom:date/lom:dateTime' => 'Life Cycle > Contribute > Date > Datetime',
+
+  // metaMetadata
+  'metaMetadata' => 'Meta Metadata (Requires Template)',
+  'metaMetadata/identifier/lom:catalog' => 'Meta Metadata > Identifier > Catalog',
+  'metaMetadata/identifier/lom:entry' => 'Meta Metadata > Identifier > Entry',
+  'metaMetadata/contribute/lom:role/lom:source' => 'Meta Metadata > Contribute > Role > Source',
+  'metaMetadata/contribute/lom:role/lom:value' => 'Meta Metadata > Contribute > Role > Value',
+  'metaMetadata/contribute/lom:entity' => 'Meta Metadata > Contribute > Entity',
+  'metaMetadata/contribute/lom:date/lom:dateTime' => 'Meta Metadata > Contribute > Date > Datetime',
+  'metaMetadata/metadataSchema' => 'Meta Metadata > Metadata Schema',
+  'metaMetadata/language' => 'Meta Metadata > Language',
+
+  // technical
+  'technical' => 'Technical (Requires Template)',
+  'technical/format' => 'Technical > Format',
+  'technical/location' => 'Technical > Location',
+  'technical/embedCode' => 'Technical > Embed Code',
+  'technical/size' => 'Technical > File Size',
+
+  // educational
+  'educational' => 'Educational (Requires Template)',
+  'educational/interactivityType' => 'Educational > Interactivity (Requires Template)',
+  'educational/interactivityType/lom:source' => 'Educational > Interactivity > Source',
+  'educational/interactivityType/lom:value' => 'Educational > Interactivity > Value',
+  'educational/learningResourceType' => 'Educational > Learning Resource Type (Requires Template)',
+  'educational/learningResourceType/lom:source' => 'Educational > Learning Resource Type > Source',
+  'educational/learningResourceType/lom:value' => 'Educational > Learning Resource Type > Value',
+  'educational/interactivityLevel' => 'Educational > Interactivity Level (Requires Template)',
+  'educational/interactivityLevel/lom:source' => 'Educational > Interactivity Level > Source',
+  'educational/interactivityLevel/lom:value' => 'Educational > Interactivity Level > Value',
+  'educational/intendedEndUserRole' => 'Educational > Intended End User Role (Requires Template)',
+  'educational/intendedEndUserRole/lom:source' => 'Educational > Intended End User Role > Source',
+  'educational/intendedEndUserRole/lom:value' => 'Educational > Intended End User Role > Value',
+  'educational/context' => 'Educational > Context (Requires Template)',
+  'educational/context/lom:source' => 'Educational > Context > Source',
+  'educational/context/lom:value' => 'Educational > Context > Value',
+  'educational/typicalAgeRange/lom:string@language' => 'Educational > Typical Age Range',
+  'educational/difficulty' => 'Educational > Difficulty (Requires Template)',
+  'educational/difficulty/lom:source' => 'Educational > Difficulty > Source',
+  'educational/difficulty/lom:value' => 'Educational > Difficulty > Value',
+  'educational/typicalLearningTime/lom:duration' => 'Educational > Typical Learning Time > Duration',
+  'educational/description/lom:string@language' => 'Educational > Description',
+  'educational/language' => 'Educational > Educational > Language',
+
+  // rights
+  'rights' => 'Rights (Requires Template)',
+  'rights/cost/lom:source' => 'Rights > Cost > Source',
+  'rights/cost/lom:value' => 'Rights > Cost > Value',
+  'rights/copyrightAndOtherRestrictions/lom:source' => 'Rights > Copyright (+ Other) > Source',
+  'rights/copyrightAndOtherRestrictions/lom:value' => 'Rights > Copyright (+ Other) > Value',
+  'rights/description/source/lom:string' => 'Rights > Description > Source',
+  'rights/description/value/lom:string' => 'Rights > Description > value',
+  'rights/description/lom:string@language' => 'Rights > Description',
+  'rights/description/url' => 'Rights > Description (CLEAN)',
+
+  // relation
+  'relation' => 'Relation (Requires Template)',
+  'relation/kind/lom:source' => 'Relation > Kind > Source',
+  'relation/kind/lom:value' => 'Relation > Kind > Value',
+  'relation/resource/lom:description/lom:string@language' => 'Relation > Resource > Description',
+  'relation/resource/lom:identifier/lom:catalog' => 'Relation > Resource > Identifier > Catalog',
+  'relation/resource/lom:identifier/lom:entry' => 'Relation > Resource > Identifier > Entry',
+
+  // classification
+  'classification' => 'Classification (Requires Template)',
+  'classification/purpose/lom:source' => 'Classification > Purpose > Source',
+  'classification/purpose/lom:value' => 'Classification > Purpose > Value',
+  'classification/taxonPath' => 'Classification > Taxon Path',
+  'classification/keyword/lom:string@language' => 'Classification > Keyword',
+
+  // thumbnail
+  'imgSrc' => 'Image Source (thumbnail) (base64)',
+);
+
+// Assign the data format to the global array of OAI data formats.
+$GLOBALS['views_oai_pmh']['oai_estcore'] = $oai_estcore;
